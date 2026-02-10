@@ -27,9 +27,27 @@ namespace Calculadora.Formulario
         {
             if (tabControl1.SelectedIndex == 1)
             {
+                verificarRegistros();
                 dgvPersonas.DataSource = null;
                 dgvPersonas.DataSource = personas;
             }
         }
+
+        private void verificarRegistros()
+        {
+            if (personas.Count == 00)
+                btnEliminar.Enabled = false;
+            else
+                btnEliminar.Enabled = true;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            personas.RemoveAt(dgvPersonas.CurrentRow.Index);
+            dgvPersonas.DataSource = null; //Limpiar el DataGrid
+            dgvPersonas.DataSource= personas; //Volver a llenar el DataGrid
+            verificarRegistros();
+        }
+
     }
 }
